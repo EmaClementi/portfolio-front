@@ -1,0 +1,105 @@
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-card {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+    /* Ensure it doesn't overflow */
+}
+
+.project-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Alternate direction for even items */
+.project-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.project-image {
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.project-info p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.project-link.demo {
+    background-color: var(--primary);
+    color: white;
+}
+
+.project-link.demo:hover {
+    background-color: #1557b0;
+}
+
+.project-link.github {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+.project-link.github:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary);
+}
+
+@media (max-width: 768px) {
+
+    .project-card,
+    .project-card:nth-child(even) {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .project-links {
+        justify-content: center;
+    }
+}

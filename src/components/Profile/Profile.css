@@ -1,0 +1,30 @@
+.profile-section {
+    text-align: center;
+    padding-top: 6rem;
+    /* Extra space for header/nav */
+    padding-bottom: 4rem;
+}
+
+.profile-header h1 {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #1B73E8 0%, #00C6FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+    width: 100%;
+}
+
+.profile-email,
+.profile-bio {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-bio {
+    margin-top: 1.5rem;
+    line-height: 1.8;
+}
