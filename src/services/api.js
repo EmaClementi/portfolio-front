@@ -1,4 +1,4 @@
-const API_URL = '/api';
+const API_URL = 'https://portfolio-t3zi.onrender.com/';
 
 export const get = async (endpoint) => {
     const response = await fetch(`${API_URL}${endpoint}`);
