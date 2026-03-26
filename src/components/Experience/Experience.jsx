@@ -7,6 +7,16 @@ const Experience = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Helper para formatear (YYYY-MM-DD a DD/MM/YYYY)
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const parts = dateString.split('-');
+        if (parts.length === 3) {
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return dateString;
+    };
+
     useEffect(() => {
         const fetchExperience = async () => {
             try {
@@ -35,7 +45,7 @@ const Experience = () => {
                         <div className="timeline-content">
                             <h3>{exp.titulo}</h3>
                             <h4>{exp.empresa}</h4>
-                            <p className="timeline-date">{exp.fechaInicio} - {exp.fechaFin || 'Present'}</p>
+                            <p className="timeline-date">{formatDate(exp.fechaInicio)} - {exp.fechaFin ? formatDate(exp.fechaFin) : 'Present'}</p>
                             <p className="timeline-description">{exp.descripcion}</p>
                         </div>
                     </div>

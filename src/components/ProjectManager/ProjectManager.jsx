@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProjects, createProject, updateProject, deleteProject } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
+import CloudinaryUpload from '../CloudinaryUpload/CloudinaryUpload';
 import './ProjectManager.css';
 
 const ProjectManager = () => {
@@ -34,6 +35,10 @@ const ProjectManager = () => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleImageUpload = (url) => {
+        setFormData((prev) => ({ ...prev, imagenUrl: url }));
     };
 
     const handleSubmit = async (e) => {
@@ -127,7 +132,7 @@ const ProjectManager = () => {
                         placeholder="Brief project description..."
                         value={formData.descripcion}
                         onChange={handleChange}
-                        rows="3"
+                        rows="7"
                     ></textarea>
                 </div>
 
@@ -155,13 +160,10 @@ const ProjectManager = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Image URL</label>
-                    <input
-                        type="text"
-                        name="imagenUrl"
-                        placeholder="https://link-to-screenshot.png"
-                        value={formData.imagenUrl}
-                        onChange={handleChange}
+                    <label>Project Image</label>
+                    <CloudinaryUpload
+                        currentImageUrl={formData.imagenUrl}
+                        onUploadSuccess={handleImageUpload}
                     />
                 </div>
 

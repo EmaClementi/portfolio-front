@@ -1,0 +1,141 @@
+.cloudinary-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ---------- Drop zone ---------- */
+.upload-area {
+    border: 2px dashed rgba(139, 92, 246, 0.5);
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(139, 92, 246, 0.05);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-area:hover {
+    border-color: rgba(139, 92, 246, 0.9);
+    background: rgba(139, 92, 246, 0.12);
+}
+
+.upload-area.uploading {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.upload-text {
+    color: #c4b5fd;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.upload-hint {
+    color: #6b7280;
+    font-size: 0.78rem;
+    margin: 0.25rem 0 0;
+}
+
+/* ---------- Spinner ---------- */
+.upload-spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: #c4b5fd;
+    font-size: 0.9rem;
+}
+
+.upload-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Preview ---------- */
+.image-preview-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    background: #0f0f1a;
+}
+
+.image-preview {
+    display: block;
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+}
+
+.image-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.image-preview-wrapper:hover .image-preview-overlay {
+    opacity: 1;
+}
+
+.change-image-btn,
+.remove-image-btn {
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+}
+
+.change-image-btn:hover,
+.remove-image-btn:hover {
+    transform: scale(1.05);
+}
+
+.change-image-btn:disabled,
+.remove-image-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.change-image-btn {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.remove-image-btn {
+    background: rgba(239, 68, 68, 0.85);
+    color: #fff;
+}
+
+/* ---------- Error ---------- */
+.upload-error {
+    color: #f87171;
+    font-size: 0.82rem;
+    margin: 0;
+    padding: 0.4rem 0.6rem;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}

@@ -64,23 +64,24 @@
     border: 1px solid #ddd;
 }
 
-.project-info {
+.project-manager .project-info {
     flex: 1;
 }
 
-.project-info strong {
+.project-manager .project-info strong {
     font-size: 1.1rem;
     color: #2c3e50;
     display: block;
     margin-bottom: 5px;
 }
 
-.project-info p {
+.project-manager .project-info p {
     font-size: 0.9rem;
     color: #7f8c8d;
     margin: 0 0 10px 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

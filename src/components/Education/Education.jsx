@@ -7,6 +7,16 @@ const Education = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Helper para formatear (YYYY-MM-DD a DD/MM/YYYY)
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const parts = dateString.split('-');
+        if (parts.length === 3) {
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return dateString;
+    };
+
     useEffect(() => {
         const fetchEducation = async () => {
             try {
@@ -34,7 +44,7 @@ const Education = () => {
                         <div className="timeline-content">
                             <h3>{edu.institucion}</h3>
                             <h4>{edu.titulo}</h4>
-                            <p className="timeline-date">{edu.fechaInicio} - {edu.fechaFin || 'Present'}</p>
+                            <p className="timeline-date">{formatDate(edu.fechaInicio)} - {edu.fechaFin ? formatDate(edu.fechaFin) : 'Present'}</p>
                         </div>
                     </div>
                 ))}
