@@ -26,6 +26,7 @@ const ExperienceManager = () => {
             const data = await getExperience();
             setExperiences(data);
         } catch (err) {
+            console.error(err);
             setError('Error loading experiences');
         } finally {
             setLoading(false);
@@ -67,6 +68,7 @@ const ExperienceManager = () => {
             setEditingId(null);
             fetchExperiences();
         } catch (err) {
+            console.error(err);
             setError('Failed to save experience');
         }
     };
@@ -88,6 +90,7 @@ const ExperienceManager = () => {
                 await deleteExperience(id, user.token);
                 fetchExperiences();
             } catch (err) {
+                console.error(err);
                 setError('Failed to delete experience');
             }
         }

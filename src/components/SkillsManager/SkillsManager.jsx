@@ -23,6 +23,7 @@ const SkillsManager = () => {
             const data = await getSkills();
             setSkills(data);
         } catch (err) {
+            console.error(err);
             setError('Error loading skills');
         } finally {
             setLoading(false);
@@ -52,6 +53,7 @@ const SkillsManager = () => {
             setEditingId(null);
             fetchSkills();
         } catch (err) {
+            console.error(err);
             setError('Failed to save skill');
         }
     };
@@ -67,6 +69,7 @@ const SkillsManager = () => {
                 await deleteSkill(id, user.token);
                 fetchSkills();
             } catch (err) {
+                console.error(err);
                 setError('Failed to delete skill');
             }
         }

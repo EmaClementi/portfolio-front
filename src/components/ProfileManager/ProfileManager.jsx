@@ -21,31 +21,32 @@ const ProfileManager = () => {
     });
 
     useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const data = await getProfileById(user.id);
+                setFormData({
+                    nombre: data.nombre || '',
+                    apellido: data.apellido || '',
+                    titulo: data.titulo || '',
+                    descripcion: data.descripcion || '',
+                    fotoUrl: data.fotoUrl || '',
+                    ubicacion: data.ubicacion || '',
+                    githubUrl: data.githubUrl || '',
+                    linkedinUrl: data.linkedinUrl || '',
+                    email: data.email || ''
+                });
+            } catch (err) {
+                console.error(err);
+                setError('Error loading profile data');
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (user && user.id) {
             fetchProfile();
         }
     }, [user]);
-
-    const fetchProfile = async () => {
-        try {
-            const data = await getProfileById(user.id);
-            setFormData({
-                nombre: data.nombre || '',
-                apellido: data.apellido || '',
-                titulo: data.titulo || '',
-                descripcion: data.descripcion || '',
-                fotoUrl: data.fotoUrl || '',
-                ubicacion: data.ubicacion || '',
-                githubUrl: data.githubUrl || '',
-                linkedinUrl: data.linkedinUrl || '',
-                email: data.email || ''
-            });
-        } catch (err) {
-            setError('Error loading profile data');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,6 +68,7 @@ const ProfileManager = () => {
             setSuccess(true);
             setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
+            console.error(err);
             setError('Failed to update profile');
         }
     };

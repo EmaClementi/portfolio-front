@@ -22,13 +22,6 @@ const Home = () => {
             </main>
             <footer>
                 <p>&copy; {new Date().getFullYear()} My Portfolio. All rights reserved.</p>
-                <button
-                    onClick={() => window.location.href = '/login'}
-                    className="admin-link"
-                    style={{ background: 'transparent', color: '#666', fontSize: '0.8rem', padding: '0.5rem' }}
-                >
-                    Admin Access
-                </button>
             </footer>
         </div>
     );

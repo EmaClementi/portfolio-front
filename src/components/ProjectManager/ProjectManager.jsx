@@ -27,6 +27,7 @@ const ProjectManager = () => {
             const data = await getProjects();
             setProjects(data);
         } catch (err) {
+            console.error(err);
             setError('Error loading projects');
         } finally {
             setLoading(false);
@@ -67,6 +68,7 @@ const ProjectManager = () => {
             setEditingId(null);
             fetchProjects();
         } catch (err) {
+            console.error(err);
             setError('Failed to save project');
         }
     };
@@ -88,6 +90,7 @@ const ProjectManager = () => {
                 await deleteProject(id, user.token);
                 fetchProjects();
             } catch (err) {
+                console.error(err);
                 setError('Failed to delete project');
             }
         }

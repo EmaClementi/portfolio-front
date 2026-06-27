@@ -1,85 +1,87 @@
-import React, { useState } from 'react';
-import { createContactMessage } from '../../services/api';
+import React, { useEffect, useState } from 'react';
+import { getProfile } from '../../services/api';
 import './Contact.css';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        nombre: '',
-        email: '',
-        mensaje: ''
-    });
-    const [status, setStatus] = useState(null); // 'success', 'error', or null
-    const [loading, setLoading] = useState(false);
+    const [profile, setProfile] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [copied, setCopied] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const data = await getProfile();
+                if (data && data.length > 0) {
+                    setProfile(data[0]);
+                }
+            } catch (err) {
+                console.error("Error loading profile for contact section:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProfile();
+    }, []);
+
+    const handleCopyEmail = (email) => {
+        navigator.clipboard.writeText(email);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setStatus(null);
-        try {
-            await createContactMessage(formData);
-            setStatus('success');
-            setFormData({ nombre: '', email: '', mensaje: '' });
-        } catch (error) {
-            setStatus('error');
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    if (loading) {
+        return (
+            <section id="contact">
+                <h2>Contact</h2>
+                <div className="contact-loading">Loading contact info...</div>
+            </section>
+        );
+    }
+
+    const email = profile?.email || 'emiclementi@hotmail.com';
+    const linkedinUrl = profile?.linkedinUrl || 'https://www.linkedin.com/in/emanuel-clementi/';
 
     return (
         <section id="contact">
             <h2>Contact</h2>
-            <div className="contact-card">
-                <form onSubmit={handleSubmit} className="contact-form">
-                    <div>
-                        <label htmlFor="nombre">Name:</label>
-                        <input
-                            type="text"
-                            id="nombre"
-                            name="nombre"
-                            value={formData.nombre}
-                            onChange={handleChange}
-                            required
-                            maxLength="150"
-                        />
+            <p className="contact-subtitle">
+                Let's build something together! Feel free to reach out through any of these platforms.
+            </p>
+            <div className="contact-cards-container">
+                {/* Email Card */}
+                <div className="contact-card-item email-card">
+                    <div className="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                     </div>
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            maxLength="150"
-                        />
+                    <h3>Email</h3>
+                    <p className="contact-value">{email}</p>
+                    <div className="card-actions">
+                        <button onClick={() => handleCopyEmail(email)} className="contact-btn copy-btn">
+                            {copied ? 'Copied! ✓' : 'Copy Email'}
+                        </button>
                     </div>
-                    <div>
-                        <label htmlFor="mensaje">Message:</label>
-                        <textarea
-                            id="mensaje"
-                            name="mensaje"
-                            value={formData.mensaje}
-                            onChange={handleChange}
-                            required
-                        />
+                </div>
+
+                {/* LinkedIn Card */}
+                <div className="contact-card-item linkedin-card">
+                    <div className="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-linkedin">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
                     </div>
-                    <button type="submit" disabled={loading}>
-                        {loading ? 'Sending...' : 'Send Message'}
-                    </button>
-                    {status === 'success' && <p className="success-msg">Message sent successfully!</p>}
-                    {status === 'error' && <p className="error-msg">Error sending message. Please try again.</p>}
-                </form>
+                    <h3>LinkedIn</h3>
+                    <p className="contact-value">Let's connect professionally</p>
+                    <div className="card-actions">
+                        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="contact-btn linkedin-btn">
+                            Connect
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     );

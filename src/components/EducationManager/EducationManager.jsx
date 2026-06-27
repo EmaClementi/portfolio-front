@@ -25,6 +25,7 @@ const EducationManager = () => {
             const data = await getEducation();
             setEducation(data);
         } catch (err) {
+            console.error(err);
             setError('Error loading education');
         } finally {
             setLoading(false);
@@ -65,6 +66,7 @@ const EducationManager = () => {
             setEditingId(null);
             fetchEducation();
         } catch (err) {
+            console.error(err);
             setError('Failed to save education');
         }
     };
@@ -85,6 +87,7 @@ const EducationManager = () => {
                 await deleteEducation(id, user.token);
                 fetchEducation();
             } catch (err) {
+                console.error(err);
                 setError('Failed to delete education');
             }
         }

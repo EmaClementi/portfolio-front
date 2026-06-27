@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Logo EM</title>
+  <desc>Logo EM con fondo hexagonal y degradado violeta-cyan</desc>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <polygon points="100,18 162,54 162,126 100,162 38,126 38,54" fill="url(#g)"/>
+  <text x="100" y="112"
+        font-family="Courier New, monospace"
+        font-size="58"
+        font-weight="700"
+        fill="white"
+        text-anchor="middle">EM</text>
+</svg>
